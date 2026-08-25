@@ -1,0 +1,220 @@
+{
+  "ctor": {
+    "params": [],
+    "kwparams": {}
+  },
+  "methods": {
+    "add_rule_layer": {
+      "params": [
+        [
+          "camp_id",
+          "string"
+        ],
+        [
+          "layer_key",
+          "string"
+        ],
+        [
+          "authority",
+          "address"
+        ],
+        [
+          "priority",
+          "int"
+        ],
+        [
+          "rule_text",
+          "string"
+        ],
+        [
+          "source_reference",
+          "string"
+        ]
+      ],
+      "kwparams": {},
+      "readonly": false,
+      "ret": "null",
+      "payable": false
+    },
+    "create_camp": {
+      "params": [
+        [
+          "camp_key",
+          "string"
+        ],
+        [
+          "title",
+          "string"
+        ]
+      ],
+      "kwparams": {},
+      "readonly": false,
+      "ret": "string",
+      "payable": false
+    },
+    "decide_exception": {
+      "params": [
+        [
+          "request_id",
+          "string"
+        ],
+        [
+          "layer_id",
+          "string"
+        ],
+        [
+          "grant",
+          "bool"
+        ],
+        [
+          "note",
+          "string"
+        ]
+      ],
+      "kwparams": {},
+      "readonly": false,
+      "ret": "null",
+      "payable": false
+    },
+    "evaluate_layer": {
+      "params": [
+        [
+          "request_id",
+          "string"
+        ],
+        [
+          "layer_id",
+          "string"
+        ]
+      ],
+      "kwparams": {},
+      "readonly": false,
+      "ret": "null",
+      "payable": false
+    },
+    "freeze_rule_stack": {
+      "params": [
+        [
+          "camp_id",
+          "string"
+        ]
+      ],
+      "kwparams": {},
+      "readonly": false,
+      "ret": "null",
+      "payable": false
+    },
+    "get_camp": {
+      "params": [
+        [
+          "camp_id",
+          "string"
+        ]
+      ],
+      "kwparams": {},
+      "readonly": true,
+      "ret": {
+        "$dict": "any"
+      }
+    },
+    "get_camp_count": {
+      "params": [],
+      "kwparams": {},
+      "readonly": true,
+      "ret": "int"
+    },
+    "get_camp_id": {
+      "params": [
+        [
+          "index",
+          "int"
+        ]
+      ],
+      "kwparams": {},
+      "readonly": true,
+      "ret": "string"
+    },
+    "get_request": {
+      "params": [
+        [
+          "request_id",
+          "string"
+        ]
+      ],
+      "kwparams": {},
+      "readonly": true,
+      "ret": {
+        "$dict": "any"
+      }
+    },
+    "get_request_count": {
+      "params": [],
+      "kwparams": {},
+      "readonly": true,
+      "ret": "int"
+    },
+    "get_request_id": {
+      "params": [
+        [
+          "index",
+          "int"
+        ]
+      ],
+      "kwparams": {},
+      "readonly": true,
+      "ret": "string"
+    },
+    "open_request": {
+      "params": [
+        [
+          "camp_id",
+          "string"
+        ],
+        [
+          "request_key",
+          "string"
+        ],
+        [
+          "activity_description",
+          "string"
+        ]
+      ],
+      "kwparams": {},
+      "readonly": false,
+      "ret": "string",
+      "payable": false
+    },
+    "request_exception": {
+      "params": [
+        [
+          "request_id",
+          "string"
+        ],
+        [
+          "layer_id",
+          "string"
+        ],
+        [
+          "rationale",
+          "string"
+        ]
+      ],
+      "kwparams": {},
+      "readonly": false,
+      "ret": "null",
+      "payable": false
+    },
+    "resolve_request": {
+      "params": [
+        [
+          "request_id",
+          "string"
+        ]
+      ],
+      "kwparams": {},
+      "readonly": false,
+      "ret": "null",
+      "payable": false
+    }
+  }
+}

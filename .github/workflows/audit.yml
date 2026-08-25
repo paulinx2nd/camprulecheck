@@ -1,0 +1,48 @@
+name: audit
+
+on:
+  push:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install pinned dependencies
+        run: python -m pip install -r requirements.txt
+      - name: Lint and strict typecheck
+        shell: bash
+        run: |
+          SOURCE="$(find contracts -maxdepth 1 -type f -name '*.py' -print -quit)"
+          test -n "$SOURCE"
+          genvm-lint check "$SOURCE"
+          genvm-lint typecheck "$SOURCE" --strict
+      - name: Direct tests
+        run: python -m pytest tests/direct -q
+      - name: Five-validator GLSim integration
+        shell: bash
+        run: |
+          python tests/run_glsim.py --port 4000 --validators 5 --no-browser --seed 20260825 > glsim.log 2>&1 &
+          GLSIM_PID=$!
+          trap 'kill $GLSIM_PID 2>/dev/null || true' EXIT
+          python - <<'PY'
+          import socket, time
+          for _ in range(100):
+              try:
+                  with socket.create_connection(("127.0.0.1", 4000), timeout=0.2):
+                      break
+              except OSError:
+                  time.sleep(0.1)
+          else:
+              raise SystemExit("GLSim did not start")
+          PY
+          python -m pytest tests/integration -q -s
